@@ -14,6 +14,7 @@ import ULDManagementScreen from './screens/ULDManagementScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import FlightScheduleScreen from './screens/FlightScheduleScreen';
 import BottomNav from './components/BottomNav';
+import AIChatbot from './components/AIChatbot';
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ const App: React.FC = () => {
     return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
   }
 
-  // Paths that shouldn't show the bottom nav
-  const hideNavPaths = ['/login', '/map', '/flight/edit', '/flight/add'];
-  const showNav = !hideNavPaths.some(p => location.pathname.startsWith(p));
+  // Paths that shouldn't show the bottom nav or AI Bot
+  const hideUIPaths = ['/login', '/map'];
+  const showUI = !hideUIPaths.some(p => location.pathname === p);
 
   return (
     <div className="flex flex-col h-screen max-w-md mx-auto bg-bg-light dark:bg-bg-dark shadow-2xl relative overflow-hidden">
@@ -49,13 +50,18 @@ const App: React.FC = () => {
         </Routes>
       </div>
 
-      {showNav && <BottomNav />}
+      {showUI && (
+        <>
+          <BottomNav />
+          <AIChatbot />
+        </>
+      )}
       
       {/* Floating Action Button for some screens */}
       {location.pathname === '/gates' && (
         <button 
           onClick={() => navigate('/flight/add')}
-          className="fixed bottom-24 right-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 active:scale-95 transition-transform z-50"
+          className="fixed bottom-40 right-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-400/40 active:scale-95 transition-transform z-50"
         >
           <span className="material-symbols-outlined text-[28px]">add</span>
         </button>
