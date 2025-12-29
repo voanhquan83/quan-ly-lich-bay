@@ -1,0 +1,7 @@
+{
+  "name": "Airport Operations Manager (SGN)",
+  "description": "A comprehensive airport management system for gate allocation, flight scheduling, staff coordination, and real-time operations tracking.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
